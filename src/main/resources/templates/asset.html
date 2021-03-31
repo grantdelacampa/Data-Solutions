@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8"/>
+<title>Asset Manager</title>
+ <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div align="center">
+    <h1>Asset List</h1>
+    <br/><br/>
+    <table cellpadding="10" border="1" >
+        <thead>
+            <tr>
+                <th>Asset ID</th>
+                <th>Date Acquired</th>
+                <th>Serial Number</th>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Manufacturer</th>
+                <th>Type</th>
+                <th sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="asset : ${listAssets}">
+                <td th:text="${asset.AstNo}">Asset ID</td>
+                <td th:text="${asset.AqrDate}">Date Acquired</td>
+                <td th:text="${asset.Ast_SN}">Serial Number</td>
+                <td th:text="${asset.AstModel}">Model</td>
+                <td th:text="${asset.Status}">Status</td>
+                <td th:text="${asset.Manufacturer}">Manufacturer</td>
+                <td th:text="${asset.Ast_type}">Type</td>
+                <td sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">
+                	<!-- If path fails to map check brackets!!! --> 
+                	<a th:href="@{/asset/edit/{id} (id=${asset.AstNo})}" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Edit</a>
+                    <a th:href="@{/asset/delete/{id} (id=${asset.AstNo})}" sec:authorize="hasAnyAuthority('ADMIN')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+<div th:insert="fragments/footer :: footer"></div>
+</html>

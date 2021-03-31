@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+</head>
+<div th:fragment="asset_form">
+<tr>             
+	<td>Date Acquired</td>
+    <td>
+    	<input type="date" th:field="*{AqrDate}" />
+    </td>
+</tr>
+<tr>
+	<td>Serial Number</td>
+    <td><input type="text" th:field="*{Ast_SN}" /></td>
+</tr>
+<tr>
+	<td>Model</td>
+	<td><input type="text" th:field="*{AstModel}" /></td>
+</tr>
+<tr>
+	<td>Status</td>
+ 	<td>
+    	<select th:field="*{Status}">
+        	<option th:value="'Spare'" th:text="Spare"></option>
+            <option th:value="'Deployed'" th:text="Deployed"></option>
+            <option th:value="'Repair'" th:text="Repair"></option>
+            <option th:value="'Broken'" th:text="Broken"></option>
+         </select>
+    </td>
+</tr>  
+<tr>
+	<td>Manufacturer</td>
+	<td><input type="text" th:field="*{Manufacturer}" /></td>
+</tr>
+<tr>
+	<td>Type</td>
+ 	<td>
+    	<select th:field="*{ast_type}">
+        	<option th:value="'Phone'" th:text="Phone"></option>
+            <option th:value="'TV'" th:text="TV"></option>
+            <option th:value="'Laptop'" th:text="laptop"></option>
+            <option th:value="'Desktop'" th:text="Desktop"></option>
+            <option th:value="'Other'" th:text="Other"></option>
+         </select>
+    </td>
+</tr> 
+
+</div>          
+</html>             

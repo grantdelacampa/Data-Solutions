@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>CSV Upload</title>
+ <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h1>Assets Uploaded From File</h1>
+            <!--display error if any-->
+            <div class="alert alert-danger" role="alert" th:if="${!status}">
+                <strong>Error:</strong>
+                <span th:text="${message}"></span>
+            </div>
+            <!--display users list-->
+            <div class="alert alert-success" role="alert" th:if="${status}">
+            	<strong>Success:</strong>
+            	<span th:text="${message}"></span>
+            </div>
+            <table class="table table-striped" th:if="${status}">
+                <thead>
+                <tr>
+	                <th>Date Acquired</th>
+	                <th>Serial Number</th>
+	                <th>Model</th>
+	                <th>Status</th>
+	                <th>Manufacturer</th>
+	                <th>Type</th>
+                </tr>
+                </thead>
+                <tbody>
+            <tr th:each="asset : ${ListAssets}">
+                <td th:text="${asset.AqrDate}">Date Acquired</td>
+                <td th:text="${asset.Ast_SN}">Serial Number</td>
+                <td th:text="${asset.AstModel}">Model</td>
+                <td th:text="${asset.Status}">Status</td>
+                <td th:text="${asset.Manufacturer}">Manufacturer</td>
+                <td th:text="${asset.Ast_type}">Type</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

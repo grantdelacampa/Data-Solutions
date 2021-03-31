@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Product Manager</title>
+ <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+ <!-- https://frontbackend.com/thymeleaf/how-to-add-bootstrap-css-and-js-to-thymeleaf -->
+</head>
+<body>
+<div align="center">
+<div th:insert="fragments/header :: header"></div>
+    <h1>ERROR</h1>
+    <p>We are sorry,</p>
+    <p>The application has experienced an un-handled error</p>
+    <button th:href="@{/}" type="button" class="btn btn-primary">Click here to go home</button>
+    </div>
+    </body>
+    <div th:insert="fragments/footer :: footer"></div>
+    </html>

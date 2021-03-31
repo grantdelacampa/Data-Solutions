@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8"/>
+<title>Employee Manager</title>
+ <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div align="center">
+    <h1>Employee List</h1>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Birth Date</th>
+                <th>Hire Date</th>
+                <th sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${listEmployees}">
+                <td th:text="${employee.id}">Product ID</td>
+                <!-- NOTE: this is the same as saying employee.getFirstName() -->
+                <td th:text="${employee.FirstName}">First Name</td>
+                <td th:text="${employee.LastName}">Last Name</td>
+                <td th:text="${employee.gender}">Gender</td>
+                <td th:text="${employee.BirthDate}">Birth Date</td>
+                <td th:text="${employee.HireDate}">Hire Date</td>
+                <td sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">
+                	<!-- If path fails to map check brackets!!! -->
+                	<a th:href="@{/employee/edit/{id} (id=${employee.id})}" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Edit</a>
+                    <a th:href="@{/employee/delete/{id} (id=${employee.id})}" sec:authorize="hasAnyAuthority('ADMIN')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+<div th:insert="fragments/footer :: footer"></div>
+</html>

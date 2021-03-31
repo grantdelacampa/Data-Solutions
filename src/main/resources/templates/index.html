@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8"/>
+<title>BDS Tracking System</title>
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<script th:inline="javascript">
+        var real_data = /*[[${chartData}]]*/'noValue';
+            google.charts.load('current', {
+                packages : [ 'corechart']
+            });
+            var real_data2 = /*[[${chart2Data}]]*/'noValue';
+            google.charts.load('current', {
+                packages : [ 'corechart']
+            });
+            google.charts.setOnLoadCallback(drawPieChart);
+            google.charts.setOnLoadCallback(drawPieChart2);
+ 
+        function drawPieChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Status');
+            data.addColumn('number', 'amount');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                    'width':400,
+                    'height':300};
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart'));
+            chart.draw(data, options);
+        }
+        function drawPieChart2() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Type');
+            data.addColumn('number', 'amount');
+            Object.keys(real_data2).forEach(function(key) {
+                data.addRow([ key, real_data2[key] ]);
+            });
+            var options = {
+                    'width':400,
+                    'height':300};
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart2'));
+            chart.draw(data, options);
+        }
+</script>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div align="center">
+		<h2>Welcome <b><span sec:authentication="name">Username</span></b></h2>
+        <div class="container"> 
+        	<div class="row"> 
+				<div class="card w-50">
+		  			<h5 class="card-header">Asset Status</h5>
+		  			<div class="card-body">
+		    			<div id="piechart"></div>
+		  			</div>
+				</div>
+				<div class="card w-50">
+		  			<h5 class="card-header">Asset Types</h5>
+		  			<div class="card-body">
+		    			<div id="piechart2"></div>
+		  			</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

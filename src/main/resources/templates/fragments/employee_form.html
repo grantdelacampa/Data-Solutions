@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+</head>
+<div th:fragment="employee_form">
+                <tr>             
+                    <td>First Name:</td>
+                    <td>
+                        <input type="text" th:field="*{FirstName}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" th:field="*{LastName}" /></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                    	<select th:field="*{Gender}">
+                    		<option th:value="'M'" th:text="Male"></option>
+                    		<option th:value="'F'" th:text="Female"></option>
+                    		<option th:value="'NA'" th:text="NA"></option>
+                    	</select>
+                    </td>
+                </tr>
+				<tr>             
+					<td>Birth Date:</td>
+    				<td>
+    					<input type="date" th:field="*{BirthDate}" />
+    				</td>
+				</tr>
+				<tr>             
+					<td>Hire Date:</td>
+    				<td>
+    					<input type="date" th:field="*{HireDate}" />
+    				</td>
+				</tr>
+	</div>          
+</html> 
