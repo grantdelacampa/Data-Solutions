@@ -11,17 +11,17 @@
 <div align="center">
     <h1>Asset List</h1>
     <br/><br/>
-    <table cellpadding="10" border="1" >
+    <table class="table table-sm" >
         <thead>
             <tr>
-                <th>Asset ID</th>
-                <th>Date Acquired</th>
-                <th>Serial Number</th>
-                <th>Model</th>
-                <th>Status</th>
-                <th>Manufacturer</th>
-                <th>Type</th>
-                <th sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
+                <th scope="col">Asset ID</th>
+                <th scope="col">Date Acquired</th>
+                <th scope="col">Serial Number</th>
+                <th scope="col">Model</th>
+                <th scope="col">Status</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Type</th>
+                <th scope="col" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
             </tr>
         </thead>
         <tbody>
