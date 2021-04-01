@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.myproject.datasolutions.employee.Employee;
 import com.opencsv.bean.CsvBindByName;
 
 @Entity
@@ -23,6 +26,13 @@ public class Asset {
 	@CsvBindByName
 	private String ast_type;
 	
+	private Integer emp_id;
+	
+	// An employee can have many assets
+	@ManyToOne
+    @JoinColumn(name="id",  insertable = false, updatable = false)
+    private Employee employee;
+	
 	public Asset() {
 		
 	}
@@ -33,7 +43,7 @@ public class Asset {
 		this.ast_model = ast_model;
 		this.status = status;
 		this.manufacturer = manufacturer;
-		this.ast_type = ast_type;
+		this.ast_type = ast_type;	
 	}
 	
 	@Id
@@ -92,5 +102,14 @@ public class Asset {
 
 	public void setAst_type(String ast_type) {
 		this.ast_type = ast_type;
+	}
+
+	public Integer getEmp_id() {
+		return emp_id;
+	}
+
+	// Cast the passed value as an Integer to handle the NULL case.
+	public void setEmp_id(Integer emp_id) {
+		this.emp_id = emp_id;
 	}
 }

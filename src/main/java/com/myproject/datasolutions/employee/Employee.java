@@ -5,10 +5,15 @@
  */
 package com.myproject.datasolutions.employee;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.myproject.datasolutions.assets.Asset;
 
 @Entity
 public class Employee {
@@ -19,6 +24,10 @@ public class Employee {
 	private String gender;
 	private String birth_date;
 	private String hire_date;
+	
+	//One employee can have many assets
+    @OneToMany(mappedBy="employee")
+    private Set<Asset> assets;
 	
 	protected Employee() {
 	}

@@ -21,6 +21,7 @@
                 <th scope="col">Status</th>
                 <th scope="col">Manufacturer</th>
                 <th scope="col">Type</th>
+                <th scope="col">Emp</th>
                 <th scope="col" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td th:text="${asset.Status}">Status</td>
                 <td th:text="${asset.Manufacturer}">Manufacturer</td>
                 <td th:text="${asset.Ast_type}">Type</td>
+                <td th:text="${asset.Emp_id}">Emp</td>
                 <td sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">
                 	<!-- If path fails to map check brackets!!! --> 
                 	<a th:href="@{/asset/edit/{id} (id=${asset.AstNo})}" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Edit</a>
