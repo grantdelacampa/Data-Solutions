@@ -5,10 +5,13 @@
  */
 package com.myproject.datasolutions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.datasolutions.assets.AssetService;
+import com.myproject.datasolutions.employee.Employee;
+import com.myproject.datasolutions.employee.EmployeeService;
 
 @Controller
 public class AppController {	
 	
 	@Autowired
 	private AssetService astService;
+	
+	@Autowired
+	private UserService service;
 	
 	//Map to the index page
 	@RequestMapping("/")
@@ -46,6 +54,18 @@ public class AppController {
 	@RequestMapping("/import")
 	public String viewImportPage() {
 		return "import_csv";
+	}
+	
+	//Map to the users page
+	@RequestMapping("/user")
+	public String viewUsersPage(Model model) {
+		Iterable<User> itrUser = service.listAll();
+		List<User> listUsers = new ArrayList<>();
+		for(User u : itrUser) {
+			listUsers.add(u);
+		}
+		model.addAttribute("listUsers", itrUser);
+		return "user";
 	}
 	
 	/*----------------------------------------------------------------------------------

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8"/>
+<title>Employee Manager</title>
+ <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div align="center">
+    <h1>Employee List</h1>
+    <br/><br/>
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope = "col">User ID</th>
+                <th scope = "col">Username</th>
+                <th scope = "col">Enabled</th>
+                <th scope = "col">Roles</th>
+                <th scope = "col" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${listUsers}">
+                <td th:text="${user.id}">User ID</td>
+                <td th:text="${user.Username}">User Name</td>
+                <td th:text="${user.Enabled}">Enabled</td>
+                <td th:each="role : ${user.Roles}">
+                	<p th:text="${role.name}">name</p>
+                </td>
+                <td>
+                	<!-- If path fails to map check brackets!!! -->
+                	<!-- <a th:href="@{/employee/edit/{id} (id=${employee.id})}" sec:authorize="hasAnyAuthority('EDITOR', 'CREATOR', 'ADMIN')">Edit</a>-->
+                    <!-- <a th:href="@{/employee/delete/{id} (id=${employee.id})}" sec:authorize="hasAnyAuthority('ADMIN')">Delete</a>-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+<div th:insert="fragments/footer :: footer"></div>
+</html>

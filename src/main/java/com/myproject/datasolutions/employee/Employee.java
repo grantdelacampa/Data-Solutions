@@ -5,6 +5,7 @@
  */
 package com.myproject.datasolutions.employee;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Employee {
 	
 	//One employee can have many assets
     @OneToMany(mappedBy="employee")
-    private Set<Asset> assets;
+    private Set<Asset> assets = new HashSet<Asset>();
 	
 	protected Employee() {
 	}
